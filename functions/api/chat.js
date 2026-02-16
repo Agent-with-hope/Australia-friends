@@ -12,14 +12,16 @@ export async function onRequestPost(context) {
         body: JSON.stringify({
             model: "glm-4-flash",
             messages: [
-                { role: "system", content: system || "你是一个赛博马年贺岁助手。" },
+                { role: "system", content: system || "你是一个赛博老司机助手。" },
                 { role: "user", content: prompt }
             ]
         })
     });
 
     const data = await response.json();
-    return new Response(JSON.stringify({ result: data.choices[0].message.content }), {
+    const resultText = data.choices[0].message.content;
+    
+    return new Response(JSON.stringify({ result: resultText }), {
         headers: { "Content-Type": "application/json" }
     });
 }
